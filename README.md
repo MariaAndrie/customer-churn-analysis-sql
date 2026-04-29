@@ -41,3 +41,4 @@ customer-churn-analysis-sql/
 ├── churn_overview.png
 ├── support_vs_churn.png
 └── segments_heatmap.png
+
