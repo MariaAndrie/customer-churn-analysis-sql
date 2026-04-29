@@ -28,7 +28,7 @@ The dataset contains ~440k customer records with demographic, behavioral, and su
 
 ## Project Structure
 
-
+'''
 customer-churn-analysis-sql/
 ├── README.md
 ├── data/
@@ -41,4 +41,4 @@ customer-churn-analysis-sql/
 ├── churn_overview.png
 ├── support_vs_churn.png
 └── segments_heatmap.png
-
+'''
