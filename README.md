@@ -38,7 +38,7 @@ customer-churn-analysis-sql/
 ├── powerbi/
 │ └── churn_dashboard.pbix
 └── images/
-├── churn_overview.png
-├── support_vs_churn.png
-└── segments_heatmap.png
+│ ├── churn_overview.png
+│ ├── support_vs_churn.png
+│ └── segments_heatmap.png
 ```
