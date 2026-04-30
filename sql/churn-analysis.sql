@@ -21,7 +21,7 @@ select count(*) from customer;
 -- Result
 -- 440832
 
--- check for dublicates
+-- check for duplicates
 select count(distinct customerID) from customer;
 
 -- Result
@@ -74,7 +74,8 @@ group by churn;
 	Usage frequency shows only a minor difference between groups, suggesting that engagement alone may not be a strong predictor of churn in this dataset.
 	* Tenure
 	30 vs 32
-	Customer tenure has a limited impact on churn, indicating that users leave at various stages of the lifecycle. */
+	Customer tenure has a limited impact on churn, indicating that users leave at various stages of the lifecycle. 
+*/
     
     --  to find segmentation thresholds    
      select support_calls, count(*)
@@ -201,6 +202,63 @@ medium_spend	146097	41.00
 that higher spend does not necessarily improve retention beyond a certain point.
 */
 
+-- Evaluate how contract length impacts customer churn
+select
+    contract_length,
+    count(*) as users,
+    round(avg(churn)*100,2) as churn_rate
+from customer
+group by contract_length
+order by churn_rate desc;
+
+/*
+Result
+
+contract_length	users	churn_rate
+Monthly			87104	100.00
+Annual			177198	46.08
+Quarterly		176530	46.03
+
+
+=========================================
+	Findings
+=========================================
+* Monthly contracts show a 100% churn rate, compared with ~46% for annual and quarterly contracts
+* Longer contract commitments are associated with stronger retention
+* This suggests that encouraging customers to move from monthly to longer-term plans could improve retention
+* Customers on monthly contracts churn 3x more than annual contracts
+
+
+*/
+
+
+-- -- Evaluate churn risk and revenue contribution by subscription plan
+select
+	subscription_type,
+    count(*) as users,
+    round(avg(churn),2)*100 as churn_rate,
+    round(avg(total_spend),2) as avg_spend
+from customer
+group by subscription_type
+order by churn_rate desc;
+
+/*
+Result
+
+subscription_plan	users	churn_rate	avg_spend
+Basic				143026	58.00		628.68
+Standard			149128	56.00		633.14
+Premium				148678	56.00		632.93
+
+=========================================
+	Findings
+=========================================
+* Churn rates are very similar across subscription plans, ranging from ~56% to ~58%
+* Average spend is also nearly identical across Basic, Standard, and Premium plans.
+* Subscription type does not appear to be a major churn differentiator in this dataset
+
+*/
+
 
 -- combine support and payment segments to identify highest-risk customer groups
 select 
@@ -275,9 +333,9 @@ low_support		low_delay		95413	22.00
 =========================================
 	Findings
 =========================================
-* High support interaction is a dominant churn driver, overriding all other factors including payment behavior.
-* Extreme payment delays independently drive churn, even among otherwise low-risk customers.
-* Customers with low support interaction and low payment delay represent the most stable segment.
+* Support interaction is the strongest churn indicator
+* Extreme payment delays independently drive churn, even among otherwise low-risk customers
+* Customers with low support interaction and low payment delay represent the most stable segment
 */
 
 -- view for PowerBI visualization
@@ -312,4 +370,4 @@ select
 	end as spend_segment
 from customer;
     
-select * from customer_segments;
+select * from customer_segments limit 5;
