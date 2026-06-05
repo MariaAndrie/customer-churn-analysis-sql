@@ -7,6 +7,9 @@ This project analyzes customer churn in a subscription-based digital product usi
 The goal is to identify customer behaviors and segments that are most strongly associated with churn, then translate those findings into actionable retention recommendations.
 The analysis focuses on support interactions, payment delays, customer spend, contract length, and subscription type.
 
+## Dashboard Preview
+
+![Customer Churn Dashboard](images/churn_overview_.png)
 
 ## Approach
 
