@@ -9,7 +9,7 @@ The analysis focuses on support interactions, payment delays, customer spend, co
 
 ## Dashboard Preview
 
-![Customer Churn Dashboard](images/churn_overview_.png)
+![Customer Churn Dashboard](images/churn_overview.png)
 
 ## Approach
 
